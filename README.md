@@ -21,8 +21,7 @@ For testing:
 
 ### tasks for the basic editor
 - setup the repo (already done to write this readme): 0
-- setup the basic NPM related modules: 10 min
-- get the empty app running, setup configs (webpack, typescript, prettier and jest): 20 min
+- get the empty app running, install NPM modules, setup configs (webpack, typescript, prettier and jest): 30 min
 - create the main workspace loading few images as a list and displaying the one you click on above: 1h
 - create the right menu with empty buttons: 5 min
 - implement rotate functionality: 1h
