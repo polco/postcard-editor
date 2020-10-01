@@ -1,23 +1,35 @@
 import React from 'react';
 
 import { useDispatch } from 'redux/hooks';
-import { rotatePostcard } from 'redux/actions';
+import { rotatePostcard, zoomIn, zoomOut } from 'redux/actions';
 
 import './Controller.scss';
 
 const Controller: React.FC = () => {
     const dispatch = useDispatch();
 
-    function rotate() {
+    function onRotate() {
         dispatch(rotatePostcard());
+    }
+
+    function onZoomIn() {
+        dispatch(zoomIn());
+    }
+
+    function onZoomOut() {
+        dispatch(zoomOut());
     }
 
     return (
         <div className="Controller">
             <div className="Controller-button">NEW TEXT BLOCK</div>
-            <div className="Controller-button">ZOOM IN</div>
-            <div className="Controller-button">ZOOM OUT</div>
-            <div className="Controller-button" onClick={rotate}>
+            <div className="Controller-button" onClick={onZoomIn}>
+                ZOOM IN
+            </div>
+            <div className="Controller-button" onClick={onZoomOut}>
+                ZOOM OUT
+            </div>
+            <div className="Controller-button" onClick={onRotate}>
                 ROTATE
             </div>
         </div>

@@ -9,7 +9,7 @@ export interface State {
     zoom: number;
 }
 
-const initalState: State = {
+export const initialState: State = {
     postcards: [
         {
             imageUrl: 'https://picsum.photos/id/1002/800/600',
@@ -34,7 +34,10 @@ const initalState: State = {
     zoom: 1
 };
 
-const reducer: Reducer<State, Action> = (state = initalState, action) => {
+const reducer: Reducer<Readonly<State>, Action> = (
+    state = initialState,
+    action
+) => {
     switch (action.type) {
         case 'selectPostcard':
             return {
@@ -50,6 +53,16 @@ const reducer: Reducer<State, Action> = (state = initalState, action) => {
             return {
                 ...state,
                 postcards
+            };
+        case 'zoomIn':
+            return {
+                ...state,
+                zoom: state.zoom + 0.1
+            };
+        case 'zoomOut':
+            return {
+                ...state,
+                zoom: state.zoom - 0.1
             };
         default:
             return state;

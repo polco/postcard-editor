@@ -7,11 +7,12 @@ import './PostcardView.scss';
 
 export interface Props {
     postcard: Postcard;
+    zoom: number;
 }
 
 const PADDING = 16 * 2;
 
-const PostcardView: React.FC<Props> = ({ postcard }) => {
+const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
     const divRef = React.useRef<HTMLDivElement>(null);
     const imageRef = React.useRef<HTMLDivElement>(null);
     const lastPostcard = React.useRef(postcard.imageUrl);
@@ -53,8 +54,10 @@ const PostcardView: React.FC<Props> = ({ postcard }) => {
             const imageHeight = Math.max(maxY - minY, adjustedCanvaHeight);
             scale = adjustedCanvaHeight / imageHeight;
         }
-        imageRef.current!.style.transform = `translate3d(-50%, -50%, 0) scale(${scale}) rotate(${postcard.rotation}deg)`;
-    }, [postcard.width, postcard.height, postcard.rotation]);
+        imageRef.current!.style.transform = `translate3d(-50%, -50%, 0) scale(${
+            scale * zoom
+        }) rotate(${postcard.rotation}deg)`;
+    }, [postcard.width, postcard.height, postcard.rotation, zoom]);
 
     return (
         <div className="PostcardView" ref={divRef}>
