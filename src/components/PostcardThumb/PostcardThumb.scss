@@ -1,0 +1,21 @@
+.PostcardThumb {
+    border: 2px solid transparent;
+    transition: opacity 200ms linear;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &-selected {
+        border-color: red;
+    }
+
+    &-selected:hover {
+        border-color: red;
+        opacity: 1;
+    }
+
+    img {
+        height: 100%;
+    }
+}
