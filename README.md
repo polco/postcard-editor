@@ -45,7 +45,7 @@ All tasks should include some tests. But i may add additional tests at the end (
 ### Main types
  - **TextBlock**: ```{ text: string, x: number, y: number, with: number, lines: number }```
  - **Postcard**: ```{ rotation: number, scale: number, textBlocks: TextBlock[] }```
- - **App State**: ```{  postcards: Postcard[], currentPostcardIndex: number }```
+ - **App State**: ```{ postcards: Postcard[], selectedIndex: number, zoom: number }```
 
 ### Main actions
  - `selectPostcard(index: number)`: select a `Postcard`

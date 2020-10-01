@@ -1,7 +1,14 @@
 .Main {
     display: flex;
+    flex-direction: column;
+
+    .PostcardView {
+        flex: 1 0 0;
+        overflow: hidden;
+    }
 
     .PostcardList {
-        width: 100%;
+        flex-shrink: 0;
+        height: 12.5rem;
     }
 }

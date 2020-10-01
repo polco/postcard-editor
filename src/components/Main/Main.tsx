@@ -5,6 +5,8 @@ import PostcardList from 'components/PostcardList';
 import { useSelector } from 'redux/hooks';
 import { State } from 'redux/reducer';
 
+import PostcardView from 'components/PostcardView';
+
 import './Main.scss';
 
 function selectState(state: State) {
@@ -12,11 +14,12 @@ function selectState(state: State) {
 }
 
 const Main: React.FC = () => {
-    const { list, selectedIndex } = useSelector(selectState);
+    const { postcards, selectedIndex } = useSelector(selectState);
 
     return (
         <div className="Main">
-            <PostcardList postcards={list} selectedIndex={selectedIndex} />
+            <PostcardView postcard={postcards[selectedIndex]} />
+            <PostcardList postcards={postcards} selectedIndex={selectedIndex} />
         </div>
     );
 };

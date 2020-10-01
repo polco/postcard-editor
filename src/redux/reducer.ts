@@ -4,24 +4,26 @@ import { Action } from 'redux/actions';
 import Postcard from 'types/Postcard';
 
 export interface State {
-    list: Postcard[];
+    postcards: Postcard[];
     selectedIndex: number;
+    zoom: number;
 }
 
 const initalState: State = {
-    list: [
+    postcards: [
         {
             imageUrl: 'https://picsum.photos/id/1002/800/600',
             rotation: 0,
             scale: 1
         },
         {
-            imageUrl: 'https://picsum.photos/id/1003/800/600',
+            imageUrl: 'https://picsum.photos/id/1003/600/800',
             rotation: 0,
             scale: 1
         }
     ],
-    selectedIndex: 0
+    selectedIndex: 0,
+    zoom: 1
 };
 
 const reducer: Reducer<State, Action> = (state = initalState, action) => {
