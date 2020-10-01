@@ -33,7 +33,17 @@ const reducer: Reducer<State, Action> = (state = initalState, action) => {
         case 'selectPostcard':
             return {
                 ...state,
-                selectedIndex: action.index
+                selectedIndex: state.postcards.indexOf(action.postcard)
+            };
+        case 'rotatePostcard':
+            const postcard = { ...state.postcards[state.selectedIndex] };
+            postcard.rotation = postcard.rotation + 90;
+            const postcards = [...state.postcards];
+            postcards[state.selectedIndex] = postcard;
+
+            return {
+                ...state,
+                postcards
             };
         default:
             return state;

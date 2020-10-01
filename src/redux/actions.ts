@@ -1,13 +1,25 @@
+import Postcard from 'types/Postcard';
+
 interface SelectPostcardAction {
     type: 'selectPostcard';
-    index: number;
+    postcard: Postcard;
 }
 
-export function selectPostcard(index: number): SelectPostcardAction {
+interface RotatePostcardAction {
+    type: 'rotatePostcard';
+}
+
+export function selectPostcard(postcard: Postcard): SelectPostcardAction {
     return {
         type: 'selectPostcard',
-        index
+        postcard
     };
 }
 
-export type Action = SelectPostcardAction;
+export function rotatePostcard(): RotatePostcardAction {
+    return {
+        type: 'rotatePostcard'
+    };
+}
+
+export type Action = SelectPostcardAction | RotatePostcardAction;

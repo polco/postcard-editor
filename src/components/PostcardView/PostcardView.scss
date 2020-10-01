@@ -1,14 +1,16 @@
 .PostcardView {
     display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 1rem;
+    position: relative;
 
     &-image {
-        flex: 1 0 0;
-        height: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transition: transform 300ms ease-out;
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
+        pointer-events: none;
     }
 }

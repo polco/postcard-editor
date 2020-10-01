@@ -1,19 +1,22 @@
 .Main {
-    display: grid;
-    grid-template-columns: auto 12.5rem;
-    grid-template-rows: auto min-content;
+    display: flex;
+
+    &-workspace {
+        flex: 1 0 0;
+        display: flex;
+        flex-direction: column;
+    }
 
     .PostcardView {
-        align-self: stretch;
+        flex: 1 0 0;
     }
 
     .PostcardList {
-        grid-column: 1;
-        grid-row: 2;
+        flex-shrink: 0;
     }
 
     .Controller {
-        grid-column: 2;
-        grid-row: 1 / span 2;
+        width: 12.5rem;
+        flex-shrink: 0;
     }
 }

@@ -25,5 +25,5 @@ test('PostcardList can dispatch a selectPostcard action', () => {
     );
     container.find(PostcardThumb).at(1).props().selectPostcard(postcard2);
 
-    expect(dispatch).toHaveBeenCalledWith(selectPostcard(1));
+    expect(dispatch).toHaveBeenCalledWith(selectPostcard(postcard2));
 });

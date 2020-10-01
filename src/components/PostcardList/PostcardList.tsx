@@ -16,14 +16,15 @@ const PostcardList: React.FC<Props> = ({ postcards, selectedIndex }) => {
     const dispatch = useDispatch();
 
     function selectPostcard(postcard: Postcard) {
-        dispatch(selectPostcardAction(postcards.indexOf(postcard)));
+        dispatch(selectPostcardAction(postcard));
     }
+    const selectPostcardCb = React.useCallback(selectPostcard, []);
 
     return (
         <div className="PostcardList">
             {postcards.map((postcard, i) => (
                 <PostcardThumb
-                    selectPostcard={selectPostcard}
+                    selectPostcard={selectPostcardCb}
                     postcard={postcard}
                     isSelected={i === selectedIndex}
                     key={i}

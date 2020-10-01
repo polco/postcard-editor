@@ -18,8 +18,13 @@ const Main: React.FC = () => {
 
     return (
         <div className="Main">
-            <PostcardView postcard={postcards[selectedIndex]} />
-            <PostcardList postcards={postcards} selectedIndex={selectedIndex} />
+            <div className="Main-workspace">
+                <PostcardView postcard={postcards[selectedIndex]} />
+                <PostcardList
+                    postcards={postcards}
+                    selectedIndex={selectedIndex}
+                />
+            </div>
             <Controller />
         </div>
     );
