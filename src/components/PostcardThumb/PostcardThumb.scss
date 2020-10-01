@@ -1,8 +1,9 @@
 .PostcardThumb {
+    border: 2px solid transparent;
+    transition: transform 200ms ease-out, opacity 200ms linear;
     background-size: contain;
     background-position: center center;
-    border: 2px solid transparent;
-    transition: opacity 200ms linear;
+    background-repeat: no-repeat;
 
     &:hover {
         opacity: 0.8;

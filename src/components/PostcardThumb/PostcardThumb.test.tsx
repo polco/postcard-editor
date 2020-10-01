@@ -5,6 +5,8 @@ import PostcardThumb, { Props } from './PostcardThumb';
 const defaultProps: Props = {
     postcard: { imageUrl: 'url', rotation: 0, width: 1, height: 1 },
     isSelected: false,
+    x: 0,
+    scale: 1,
     selectPostcard: jest.fn()
 };
 

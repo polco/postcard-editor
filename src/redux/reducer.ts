@@ -22,6 +22,12 @@ const initalState: State = {
             rotation: 0,
             width: 600,
             height: 800
+        },
+        {
+            imageUrl: 'https://picsum.photos/id/1004/800/600',
+            rotation: 0,
+            width: 800,
+            height: 600
         }
     ],
     selectedIndex: 0,

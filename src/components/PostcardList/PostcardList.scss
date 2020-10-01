@@ -1,13 +1,12 @@
 .PostcardList {
     display: flex;
     justify-content: center;
-    padding: 1rem;
+    position: relative;
 
     .PostcardThumb {
+        position: absolute;
+        left: 0;
+        top: 50%;
         height: 100%;
-    }
-
-    .PostcardThumb + .PostcardThumb {
-        margin-left: 1rem;
     }
 }

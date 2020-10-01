@@ -5,16 +5,20 @@ import Postcard from 'types/Postcard';
 
 export interface Props {
     postcard: Postcard;
+    x: number;
+    scale: number;
     selectPostcard: (postcard: Postcard) => void;
     isSelected: boolean;
 }
 
 import './PostcardThumb.scss';
 
-const HEIGHT = 200;
+export const HEIGHT = 200;
 
 const PostcardThumb: React.FC<Props> = ({
     postcard,
+    x,
+    scale,
     isSelected,
     selectPostcard
 }) => {
@@ -29,9 +33,10 @@ const PostcardThumb: React.FC<Props> = ({
                 'PostcardThumb-selected': isSelected
             })}
             style={{
-                backgroundImage: `url(${postcard.imageUrl})`,
-                height: `${HEIGHT}px`,
-                width: `${(HEIGHT * postcard.width) / postcard.height}px`
+                transform: `translate3d(${x}px,-50%,0) scale(${scale}) rotate(${postcard.rotation}deg)`,
+                height: `${postcard.height}px`,
+                width: `${postcard.width}px`,
+                backgroundImage: `url(${postcard.imageUrl})`
             }}
         />
     );

@@ -1,1 +1,1 @@
-export { default } from './PostcardThumb';
+export { default, HEIGHT } from './PostcardThumb';
