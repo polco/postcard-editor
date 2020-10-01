@@ -1,11 +1,11 @@
 import React from 'react';
 
-import PostcardList from 'components/PostcardList';
-
 import { useSelector } from 'redux/hooks';
 import { State } from 'redux/reducer';
 
+import PostcardList from 'components/PostcardList';
 import PostcardView from 'components/PostcardView';
+import Controller from 'components/Controller';
 
 import './Main.scss';
 
@@ -20,6 +20,7 @@ const Main: React.FC = () => {
         <div className="Main">
             <PostcardView postcard={postcards[selectedIndex]} />
             <PostcardList postcards={postcards} selectedIndex={selectedIndex} />
+            <Controller />
         </div>
     );
 };

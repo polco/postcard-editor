@@ -1,7 +1,8 @@
 interface Postcard {
     imageUrl: string;
     rotation: number;
-    scale: number;
+    width: number;
+    height: number;
 }
 
 export default Postcard;

@@ -11,6 +11,8 @@ export interface Props {
 
 import './PostcardThumb.scss';
 
+const HEIGHT = 200;
+
 const PostcardThumb: React.FC<Props> = ({
     postcard,
     isSelected,
@@ -26,9 +28,12 @@ const PostcardThumb: React.FC<Props> = ({
             className={cn('PostcardThumb', {
                 'PostcardThumb-selected': isSelected
             })}
-        >
-            <img src={postcard.imageUrl} />
-        </div>
+            style={{
+                backgroundImage: `url(${postcard.imageUrl})`,
+                height: `${HEIGHT}px`,
+                width: `${(HEIGHT * postcard.width) / postcard.height}px`
+            }}
+        />
     );
 };
 

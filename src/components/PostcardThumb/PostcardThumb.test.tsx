@@ -3,7 +3,7 @@ import React from 'react';
 import PostcardThumb, { Props } from './PostcardThumb';
 
 const defaultProps: Props = {
-    postcard: { imageUrl: 'url', rotation: 0, scale: 1 },
+    postcard: { imageUrl: 'url', rotation: 0, width: 1, height: 1 },
     isSelected: false,
     selectPostcard: jest.fn()
 };

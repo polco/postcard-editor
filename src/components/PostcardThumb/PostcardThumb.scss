@@ -1,4 +1,6 @@
 .PostcardThumb {
+    background-size: contain;
+    background-position: center center;
     border: 2px solid transparent;
     transition: opacity 200ms linear;
 
@@ -13,9 +15,5 @@
     &-selected:hover {
         border-color: red;
         opacity: 1;
-    }
-
-    img {
-        height: 100%;
     }
 }

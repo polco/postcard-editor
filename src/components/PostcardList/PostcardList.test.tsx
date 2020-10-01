@@ -14,8 +14,9 @@ beforeEach(jest.clearAllMocks);
 test('PostcardList can dispatch a selectPostcard action', () => {
     const postcard1: Postcard = {
         imageUrl: 'url',
-        scale: 1,
-        rotation: 1
+        rotation: 1,
+        width: 1,
+        height: 1
     };
     const postcard2: Postcard = { ...postcard1 };
 

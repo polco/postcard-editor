@@ -1,0 +1,17 @@
+.Controller {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+    &-button {
+        border-radius: 1px;
+        background-color: #62abff;
+        padding: 1rem;
+        color: white;
+        text-align: center;
+    }
+
+    &-button + &-button {
+        margin-top: 1rem;
+    }
+}

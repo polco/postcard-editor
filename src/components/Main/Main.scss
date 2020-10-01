@@ -1,14 +1,19 @@
 .Main {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto 12.5rem;
+    grid-template-rows: auto min-content;
 
     .PostcardView {
-        flex: 1 0 0;
-        overflow: hidden;
+        align-self: stretch;
     }
 
     .PostcardList {
-        flex-shrink: 0;
-        height: 12.5rem;
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .Controller {
+        grid-column: 2;
+        grid-row: 1 / span 2;
     }
 }

@@ -10,7 +10,10 @@ export interface Props {
 const PostcardView: React.FC<Props> = ({ postcard }) => {
     return (
         <div className="PostcardView">
-            <img src={postcard.imageUrl} />
+            <div
+                className="PostcardView-image"
+                style={{ backgroundImage: `url(${postcard.imageUrl})` }}
+            />
         </div>
     );
 };
