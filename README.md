@@ -20,12 +20,12 @@ For testing:
 
 
 ### tasks for the basic editor
-- setup the repo (already done to write this readme): 0
-- get the empty app running, install NPM modules, setup configs (webpack, typescript, prettier and jest): 30 min
-- create the main workspace loading few images as a list and displaying the one you click on above: 1h
-- create the right menu with empty buttons: 5 min
-- implement rotate functionality: 1h
-- implement zoom in/out functionality: 1h
+- ~~setup the repo (already done to write this readme): 0~~
+- ~~get the empty app running, install NPM modules, setup configs (webpack, typescript, prettier and jest): 30 min~~
+- ~~create the main workspace loading few images as a list and displaying the one you click on above: 1h~~
+- ~~create the right menu with empty buttons: 5 min~~
+- ~~implement rotate functionality: 1h~~
+- ~~implement zoom in/out functionality: 1h~~
 - implement the new text functionality: 1h
 
 All tasks should include some tests. But i may add additional tests at the end (like integration tests).
@@ -44,7 +44,7 @@ All tasks should include some tests. But i may add additional tests at the end (
 ## Architecture
 ### Main types
  - **TextBlock**: ```{ text: string, x: number, y: number, with: number, lines: number }```
- - **Postcard**: ```{ rotation: number, scale: number, textBlocks: TextBlock[] }```
+ - **Postcard**: ```{ imageUrl: string, width: number, height: number, rotation: number, textBlocks: TextBlock[] }```
  - **App State**: ```{ postcards: Postcard[], selectedIndex: number, zoom: number }```
 
 ### Main actions
