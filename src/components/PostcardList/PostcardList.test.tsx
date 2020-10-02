@@ -16,7 +16,8 @@ test('PostcardList can dispatch a selectPostcard action', () => {
         imageUrl: 'url',
         rotation: 1,
         width: 1,
-        height: 1
+        height: 1,
+        textBlocks: []
     };
     const postcard2: Postcard = { ...postcard1 };
 

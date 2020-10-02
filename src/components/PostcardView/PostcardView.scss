@@ -11,6 +11,19 @@
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
-        pointer-events: none;
+    }
+
+    &-textBlocks {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .TextBlockEntry {
+        position: absolute;
+        left: 0;
+        top: 0;
     }
 }

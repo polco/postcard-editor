@@ -1,4 +1,4 @@
-function getRotatedCoords(
+export function getRotatedCoords(
     centerX: number,
     centerY: number,
     x: number,

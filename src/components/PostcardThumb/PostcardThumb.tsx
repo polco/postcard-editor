@@ -13,7 +13,7 @@ export interface Props {
 
 import './PostcardThumb.scss';
 
-export const HEIGHT = 200;
+export const HEIGHT = 150;
 
 const PostcardThumb: React.FC<Props> = ({
     postcard,

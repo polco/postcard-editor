@@ -15,17 +15,18 @@ function selectState(state: State) {
 
 const Main: React.FC = () => {
     const { postcards, selectedIndex, zoom } = useSelector(selectState);
+    const selectedPostcard = postcards[selectedIndex];
 
     return (
         <div className="Main">
             <div className="Main-workspace">
-                <PostcardView postcard={postcards[selectedIndex]} zoom={zoom} />
+                <PostcardView postcard={selectedPostcard} zoom={zoom} />
                 <PostcardList
                     postcards={postcards}
                     selectedIndex={selectedIndex}
                 />
             </div>
-            <Controller />
+            <Controller postcard={selectedPostcard} />
         </div>
     );
 };

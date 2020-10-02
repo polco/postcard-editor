@@ -37,7 +37,7 @@ const PostcardList: React.FC<Props> = ({ postcards, selectedIndex }) => {
         const boundedWidth = Math.min(HEIGHT, scaledWidth);
         const pos = x - (postcard.width - boundedWidth) / 2;
         x += boundedWidth + PADDING;
-        return { x: pos, scale: scale / (scaledWidth / boundedWidth) };
+        return { x: pos, scale: (scale * boundedWidth) / scaledWidth };
     });
 
     return (
@@ -54,7 +54,7 @@ const PostcardList: React.FC<Props> = ({ postcards, selectedIndex }) => {
                         isSelected={i === selectedIndex}
                         x={x}
                         scale={scale}
-                        key={i}
+                        key={postcard.imageUrl}
                     />
                 );
             })}

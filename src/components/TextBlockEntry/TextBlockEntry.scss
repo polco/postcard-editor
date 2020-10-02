@@ -1,0 +1,16 @@
+.TextBlockEntry {
+    color: white;
+    outline: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+
+    &--edit {
+        user-select: initial;
+        color: black;
+        background-color: white;
+        margin: -5px -5px -5px -5px;
+        padding: 5px 5px 5px 5px;
+    }
+}

@@ -1,6 +1,8 @@
 import React from 'react';
-import Postcard from 'types/Postcard';
 
+import TextBlockEntry from 'components/TextBlockEntry';
+
+import Postcard from 'types/Postcard';
 import { getRotatedBoundingBox } from 'utils/transform';
 
 import './PostcardView.scss';
@@ -14,50 +16,38 @@ const PADDING = 16 * 2;
 
 const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
     const divRef = React.useRef<HTMLDivElement>(null);
-    const imageRef = React.useRef<HTMLDivElement>(null);
-    const lastPostcard = React.useRef(postcard.imageUrl);
 
+    // no transition when changing the selected postcard
+    const lastPostcard = React.useRef(postcard.imageUrl);
     let noTransition = false;
     if (lastPostcard.current !== postcard.imageUrl) {
         lastPostcard.current = postcard.imageUrl;
         noTransition = true;
     }
 
+    const [viewDimensions, setViewDimensions] = React.useState({
+        width: 0,
+        height: 0
+    });
     React.useEffect(() => {
-        if (noTransition) {
-            noTransition = false;
-            imageRef.current!.style.transition = 'none';
-        } else {
-            imageRef.current!.style.transition = '';
-        }
-    }, [noTransition]);
+        const { clientWidth, clientHeight } = divRef.current!;
+        setViewDimensions({
+            width: clientWidth - PADDING,
+            height: clientHeight - PADDING
+        });
+    }, []);
 
-    React.useEffect(() => {
-        const {
-            clientWidth: canvaWidth,
-            clientHeight: canvaHeight
-        } = divRef.current!;
-        const adjustedCanvaWidth = canvaWidth - PADDING;
-        const adjustedCanvaHeight = canvaHeight - PADDING;
+    const { minX, maxX, minY, maxY } = getRotatedBoundingBox(
+        postcard.width,
+        postcard.height,
+        postcard.rotation
+    );
 
-        const { minX, maxX, minY, maxY } = getRotatedBoundingBox(
-            postcard.width,
-            postcard.height,
-            postcard.rotation
-        );
-
-        let scale = 1;
-        if (adjustedCanvaHeight > adjustedCanvaWidth) {
-            const imageWidth = Math.max(maxX - minX, adjustedCanvaWidth);
-            scale = adjustedCanvaWidth / imageWidth;
-        } else {
-            const imageHeight = Math.max(maxY - minY, adjustedCanvaHeight);
-            scale = adjustedCanvaHeight / imageHeight;
-        }
-        imageRef.current!.style.transform = `translate3d(-50%, -50%, 0) scale(${
-            scale * zoom
-        }) rotate(${postcard.rotation}deg)`;
-    }, [postcard.width, postcard.height, postcard.rotation, zoom]);
+    const scale =
+        viewDimensions.height > viewDimensions.width
+            ? viewDimensions.width / Math.max(maxX - minX, viewDimensions.width)
+            : viewDimensions.height /
+              Math.max(maxY - minY, viewDimensions.height);
 
     return (
         <div className="PostcardView" ref={divRef}>
@@ -66,10 +56,22 @@ const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
                 style={{
                     backgroundImage: `url(${postcard.imageUrl})`,
                     width: `${postcard.width}px`,
-                    height: `${postcard.height}px`
+                    height: `${postcard.height}px`,
+                    transition: noTransition ? 'none' : '',
+                    transform: `translate3d(-50%, -50%, 0) scale(${
+                        scale * zoom
+                    }) rotate(${postcard.rotation}deg)`
                 }}
-                ref={imageRef}
-            />
+            >
+                {/* {postcard.textBlocks.map((textBlock, i) => (
+                    <TextBlockEntry key={i} textBlock={textBlock} mainScale={scale * zoom} mainRotation={postcard.rotation} />
+                ))} */}
+            </div>
+            <div className="PostcardView-textBlocks">
+                {postcard.textBlocks.map((textBlock, i) => (
+                    <TextBlockEntry key={i} textBlock={textBlock} />
+                ))}
+            </div>
         </div>
     );
 };
