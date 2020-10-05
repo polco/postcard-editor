@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 import Main from 'components/Main';
 
-import postcardReducer from 'redux/reducer';
+import reducer from 'redux/reducer';
 
 import 'index.scss';
 
-import { createStore } from 'redux';
-
-const store = createStore(postcardReducer);
+const store = createStore(reducer);
 
 ReactDOM.render(
     <Provider store={store}>

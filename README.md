@@ -26,16 +26,16 @@ For testing:
 - ~~create the right menu with empty buttons: 5 min~~
 - ~~implement rotate functionality: 1h~~
 - ~~implement zoom in/out functionality: 1h~~
-- implement the new text functionality: 1h
+- ~~implement the new text functionality: 1h~~
 
 All tasks should include some tests. But i may add additional tests at the end (like integration tests).
 
 
 ### additional tasks
-- implement undo/redo with redux: 1h
+- ~~implement undo/redo with redux: 1h~~
 - save current state to local storage to persist accross reloads: 10 min
-- allow changing text position: 30 min
-- allow changing text dimensions: 30 min
+- ~~allow changing text position: 30 min~~
+- ~~allow changing text dimensions: 30 min~~
 - allow deleting text blocks: 15 min
 - allow rotate/zooming with the mouse: 2h
 

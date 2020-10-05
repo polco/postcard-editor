@@ -1,7 +1,7 @@
 import PostcardThumb from 'components/PostcardThumb';
 import { shallow } from 'enzyme';
 import React from 'react';
-import { selectPostcard } from 'redux/actions';
+import { selectPostcard } from 'redux/postcardActions';
 import { useDispatch } from 'redux/hooks';
 import Postcard from 'types/Postcard';
 import PostcardList from './PostcardList';

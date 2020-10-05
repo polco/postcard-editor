@@ -5,7 +5,7 @@ import {
 } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { Action } from './actions';
+import Action from './actions';
 import { State } from './reducer';
 
 export const useDispatch: () => Dispatch<Action> = reduxUseDispatch;

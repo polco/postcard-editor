@@ -3,7 +3,7 @@ import React from 'react';
 import Postcard from 'types/Postcard';
 import PostcardThumb, { HEIGHT } from 'components/PostcardThumb';
 import { useDispatch } from 'redux/hooks';
-import { selectPostcard as selectPostcardAction } from 'redux/actions';
+import { selectPostcard as selectPostcardAction } from 'redux/postcardActions';
 
 import './PostcardList.scss';
 import { getRotatedBoundingBox } from 'utils/transform';

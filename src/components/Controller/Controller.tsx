@@ -6,7 +6,8 @@ import {
     rotatePostcard,
     zoomIn,
     zoomOut
-} from 'redux/actions';
+} from 'redux/postcardActions';
+import { undo, redo } from 'redux/undoable';
 import Postcard from 'types/Postcard';
 
 import { TEXT_LINE_HEIGHT } from 'components/TextBlockEntry/TextBlockEntry';
@@ -38,6 +39,14 @@ const Controller: React.FC<Props> = ({ postcard }) => {
         dispatch(addNewTextBlock(x, y));
     }
 
+    function onUndo() {
+        dispatch(undo());
+    }
+
+    function onRedo() {
+        dispatch(redo());
+    }
+
     return (
         <div className="Controller">
             <div className="Controller-button" onClick={onNewText}>
@@ -51,6 +60,12 @@ const Controller: React.FC<Props> = ({ postcard }) => {
             </div>
             <div className="Controller-button" onClick={onRotate}>
                 ROTATE
+            </div>
+            <div className="Controller-button" onClick={onUndo}>
+                UNDO
+            </div>
+            <div className="Controller-button" onClick={onRedo}>
+                REDO
             </div>
         </div>
     );

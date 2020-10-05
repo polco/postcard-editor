@@ -7,7 +7,7 @@ import {
     removeTextBlock,
     updateTextBlockContent,
     updateTextBlockPosition
-} from 'redux/actions';
+} from 'redux/postcardActions';
 
 import './TextBlockEntry.scss';
 

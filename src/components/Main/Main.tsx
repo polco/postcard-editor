@@ -10,7 +10,7 @@ import Controller from 'components/Controller';
 import './Main.scss';
 
 function selectState(state: State) {
-    return state;
+    return state.present;
 }
 
 const Main: React.FC = () => {
