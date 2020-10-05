@@ -20,7 +20,11 @@ const Main: React.FC = () => {
     return (
         <div className="Main">
             <div className="Main-workspace">
-                <PostcardView postcard={selectedPostcard} zoom={zoom} />
+                {selectedPostcard ? (
+                    <PostcardView postcard={selectedPostcard} zoom={zoom} />
+                ) : (
+                    <div className="Main-postcardPlaceholder" />
+                )}
                 <PostcardList
                     postcards={postcards}
                     selectedIndex={selectedIndex}

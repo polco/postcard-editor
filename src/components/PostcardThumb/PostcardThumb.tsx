@@ -1,5 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 
 import Postcard from 'types/Postcard';
 
@@ -8,6 +10,7 @@ export interface Props {
     x: number;
     scale: number;
     selectPostcard: (postcard: Postcard) => void;
+    removePostcard: (postcard: Postcard) => void;
     isSelected: boolean;
 }
 
@@ -20,10 +23,17 @@ const PostcardThumb: React.FC<Props> = ({
     x,
     scale,
     isSelected,
-    selectPostcard
+    selectPostcard,
+    removePostcard
 }) => {
-    function onSelect() {
+    function onSelect(e: React.MouseEvent) {
+        e.stopPropagation();
         selectPostcard(postcard);
+    }
+
+    function onRemove(e: React.MouseEvent) {
+        e.stopPropagation();
+        removePostcard(postcard);
     }
 
     return (
@@ -38,7 +48,15 @@ const PostcardThumb: React.FC<Props> = ({
                 width: `${postcard.width}px`,
                 backgroundImage: `url(${postcard.imageUrl})`
             }}
-        />
+        >
+            <FontAwesomeIcon
+                icon={faTimesCircle}
+                size="2x"
+                className="PostcardThumb-remove"
+                onClick={onRemove}
+                style={{ transform: `scale(${1 / scale})` }}
+            />
+        </div>
     );
 };
 

@@ -1,4 +1,5 @@
 .PostcardThumb {
+    position: relative;
     border: 2px solid transparent;
     transition: transform 200ms ease-out, opacity 200ms linear;
     background-size: contain;
@@ -15,6 +16,22 @@
 
     &-selected:hover {
         border-color: red;
+        opacity: 1;
+    }
+
+    &-remove {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        opacity: 0;
+        transition: opacity 100ms linear, color 100ms linear;
+
+        &:hover {
+            color: red;
+        }
+    }
+
+    &:hover &-remove {
         opacity: 1;
     }
 }

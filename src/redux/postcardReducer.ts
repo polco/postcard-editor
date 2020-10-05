@@ -42,11 +42,42 @@ const reducer: Reducer<Readonly<State>, Action> = (
     action
 ) => {
     switch (action.type) {
+        case 'addPostcard': {
+            const width = Math.floor(Math.random() * 300 + 700); // 700 - 1000
+            const height = Math.floor(Math.random() * 300 + 700); // 700 - 1000
+            const id = Math.floor(Math.random() * 1000);
+            return {
+                ...state,
+                postcards: [
+                    ...state.postcards,
+                    {
+                        imageUrl: `https://picsum.photos/id/${id}/${width}/${height}`,
+                        rotation: 0,
+                        width,
+                        height,
+                        textBlocks: []
+                    }
+                ]
+            };
+        }
         case 'selectPostcard':
             return {
                 ...state,
                 selectedIndex: state.postcards.indexOf(action.postcard)
             };
+        case 'removePostcard': {
+            const index = state.postcards.indexOf(action.postcard);
+            return {
+                ...state,
+                postcards: state.postcards.filter(
+                    (postcard) => postcard !== action.postcard
+                ),
+                selectedIndex:
+                    state.selectedIndex >= index
+                        ? Math.max(state.selectedIndex - 1, 0)
+                        : state.selectedIndex
+            };
+        }
         case 'rotatePostcard': {
             const postcard = { ...state.postcards[state.selectedIndex] };
             postcard.rotation = postcard.rotation + 90;

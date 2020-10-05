@@ -1,9 +1,7 @@
 import { Reducer } from 'redux';
 import undoable, { redo, undo } from './undoable';
 
-type State = {
-    counter: number;
-};
+type State = { counter: number };
 
 type Action = { type: 'plus1' } | { type: 'minus1' };
 

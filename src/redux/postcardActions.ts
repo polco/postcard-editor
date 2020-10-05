@@ -42,6 +42,15 @@ interface RemoveTextBlockAction {
     textBlock: TextBlock;
 }
 
+interface AddPostcardAction {
+    type: 'addPostcard';
+}
+
+interface RemovePostcardAction {
+    type: 'removePostcard';
+    postcard: Postcard;
+}
+
 type Action =
     | SelectPostcardAction
     | RotatePostcardAction
@@ -50,7 +59,9 @@ type Action =
     | AddTextBlockAction
     | UpdateTextBlockContentAction
     | UpdateTextBlockPositionAction
-    | RemoveTextBlockAction;
+    | RemoveTextBlockAction
+    | AddPostcardAction
+    | RemovePostcardAction;
 
 export default Action;
 
@@ -116,4 +127,12 @@ export function removeTextBlock(textBlock: TextBlock): RemoveTextBlockAction {
         type: 'removeTextBlock',
         textBlock
     };
+}
+
+export function addPostcard(): AddPostcardAction {
+    return { type: 'addPostcard' };
+}
+
+export function removePostcard(postcard: Postcard): RemovePostcardAction {
+    return { type: 'removePostcard', postcard };
 }

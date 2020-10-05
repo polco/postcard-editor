@@ -1,12 +1,18 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons/faPlusCircle';
 
 import Postcard from 'types/Postcard';
 import PostcardThumb, { HEIGHT } from 'components/PostcardThumb';
 import { useDispatch } from 'redux/hooks';
-import { selectPostcard as selectPostcardAction } from 'redux/postcardActions';
+import {
+    addPostcard,
+    selectPostcard as selectPostcardAction,
+    removePostcard as removePostcardAction
+} from 'redux/postcardActions';
+import { getRotatedBoundingBox } from 'utils/transform';
 
 import './PostcardList.scss';
-import { getRotatedBoundingBox } from 'utils/transform';
 
 export interface Props {
     postcards: Postcard[];
@@ -22,6 +28,15 @@ const PostcardList: React.FC<Props> = ({ postcards, selectedIndex }) => {
         dispatch(selectPostcardAction(postcard));
     }
     const selectPostcardCb = React.useCallback(selectPostcard, []);
+
+    function removePostcard(postcard: Postcard) {
+        dispatch(removePostcardAction(postcard));
+    }
+    const removePostcardCb = React.useCallback(removePostcard, []);
+
+    function onAddPostcard() {
+        dispatch(addPostcard());
+    }
 
     let x = PADDING;
     const displays = postcards.map((postcard) => {
@@ -50,6 +65,7 @@ const PostcardList: React.FC<Props> = ({ postcards, selectedIndex }) => {
                 return (
                     <PostcardThumb
                         selectPostcard={selectPostcardCb}
+                        removePostcard={removePostcardCb}
                         postcard={postcard}
                         isSelected={i === selectedIndex}
                         x={x}
@@ -58,6 +74,15 @@ const PostcardList: React.FC<Props> = ({ postcards, selectedIndex }) => {
                     />
                 );
             })}
+            <FontAwesomeIcon
+                style={{
+                    transform: `translate3d(${x + PADDING}px,0,0)`
+                }}
+                className="PostcardList-add"
+                icon={faPlusCircle}
+                onClick={onAddPostcard}
+                size="5x"
+            />
         </div>
     );
 };

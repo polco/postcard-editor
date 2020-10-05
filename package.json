@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/polco/postcard-editor#readme",
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.31",
+    "@fortawesome/free-solid-svg-icons": "^5.15.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
     "@types/classnames": "^2.2.10",
     "@types/enzyme": "^3.10.7",
     "@types/jest": "^26.0.14",

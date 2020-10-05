@@ -1,12 +1,22 @@
 .PostcardList {
-    display: flex;
-    justify-content: center;
     position: relative;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     .PostcardThumb {
         position: absolute;
         left: 0;
         top: 50%;
         height: 100%;
+    }
+
+    &-add {
+        align-self: center;
+        transition: transform 200ms ease-out, color 100ms linear;
+
+        &:hover {
+            color: red;
+        }
     }
 }

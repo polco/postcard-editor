@@ -13,16 +13,19 @@ const defaultProps: Props = {
     isSelected: false,
     x: 0,
     scale: 1,
-    selectPostcard: jest.fn()
+    selectPostcard: jest.fn(),
+    removePostcard: jest.fn()
 };
 
 beforeEach(jest.clearAllMocks);
 
 test('PostcardThumb can be selected when clicking', () => {
     const container = shallow<Props>(<PostcardThumb {...defaultProps} />);
-    container.simulate('click');
+    const stopPropagation = jest.fn();
+    container.simulate('click', { stopPropagation });
 
     expect(defaultProps.selectPostcard).toHaveBeenCalledWith(
         defaultProps.postcard
     );
+    expect(stopPropagation).toHaveBeenCalled();
 });

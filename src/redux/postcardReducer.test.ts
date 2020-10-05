@@ -1,5 +1,7 @@
 import {
     addNewTextBlock,
+    addPostcard,
+    removePostcard,
     removeTextBlock,
     rotatePostcard,
     selectPostcard,
@@ -43,8 +45,7 @@ test('reducer: test selecting a postcard', () => {
 });
 
 test('reducer: any undefined action returns the state', () => {
-    const state = initialState;
-    expect(reducer(state, { type: 'hehe' } as any)).toBe(state);
+    expect(reducer(initialState, { type: 'hehe' } as any)).toBe(initialState);
 });
 
 test('reducer: default state is correct', () => {
@@ -147,5 +148,36 @@ test('reducer: test removing a text block', () => {
             { ...stateWithText.postcards[0], textBlocks: [] },
             ...stateWithText.postcards.slice(1)
         ]
+    });
+});
+
+test('reducer: test adding a postcard', () => {
+    const newState = reducer(initialState, addPostcard());
+    expect(newState.postcards.length).toBe(initialState.postcards.length + 1);
+});
+
+test('reducer: test removing a postcard', () => {
+    let newState = reducer(
+        initialState,
+        removePostcard(initialState.postcards[2])
+    );
+    expect(newState).toEqual<State>({
+        ...initialState,
+        postcards: initialState.postcards.slice(0, -1)
+    });
+
+    newState = reducer(newState, selectPostcard(newState.postcards[1]));
+    newState = reducer(newState, removePostcard(newState.postcards[1]));
+    expect(newState).toEqual<State>({
+        ...newState,
+        postcards: [newState.postcards[0]],
+        selectedIndex: 0
+    });
+
+    newState = reducer(newState, removePostcard(newState.postcards[0]));
+    expect(newState).toEqual<State>({
+        ...newState,
+        postcards: [],
+        selectedIndex: 0
     });
 });
