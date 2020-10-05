@@ -3,8 +3,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    mode: 'development',
-    devtool: 'inline-source-map',
     entry: './src/index.tsx',
     plugins: [
         new HtmlWebpackPlugin({
@@ -13,7 +11,10 @@ module.exports = {
     ],
     resolve: {
         plugins: [new TsconfigPathsPlugin()],
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
+        alias: {
+            img: path.resolve(__dirname, 'img/'),
+        }
     },
     module: {
         rules: [
@@ -25,16 +26,10 @@ module.exports = {
                         options: { transpileOnly: true }
                     }
                 ]
-            },
-            {
-                test: /\.s[ac]ss$/i,
-                use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
     },
     output: {
-        path: path.resolve(__dirname, 'docs'),
-        filename: 'index.js',
-        publicPath: '/'
+        path: path.resolve(__dirname, 'docs')
     }
 };
