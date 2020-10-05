@@ -33,7 +33,7 @@ All tasks should include some tests. But i may add additional tests at the end (
 
 ### additional tasks
 - ~~implement undo/redo with redux: 1h~~
-- save current state to local storage to persist accross reloads: 10 min
+- ~~save current state to local storage to persist accross reloads: 10 min~~
 - ~~allow changing text position: 30 min~~
 - ~~allow changing text dimensions: 30 min~~
 - allow deleting text blocks: 15 min
