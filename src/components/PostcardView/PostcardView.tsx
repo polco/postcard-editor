@@ -62,11 +62,7 @@ const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
                         scale * zoom
                     }) rotate(${postcard.rotation}deg)`
                 }}
-            >
-                {/* {postcard.textBlocks.map((textBlock, i) => (
-                    <TextBlockEntry key={i} textBlock={textBlock} mainScale={scale * zoom} mainRotation={postcard.rotation} />
-                ))} */}
-            </div>
+            />
             <div className="PostcardView-textBlocks">
                 {postcard.textBlocks.map((textBlock, i) => (
                     <TextBlockEntry key={i} textBlock={textBlock} />

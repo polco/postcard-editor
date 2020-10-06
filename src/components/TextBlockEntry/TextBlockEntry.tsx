@@ -10,6 +10,7 @@ import {
 } from 'redux/postcardActions';
 
 import './TextBlockEntry.scss';
+import useDragBehavior from './useDragBehavior';
 
 export interface Props {
     textBlock: TextBlock;
@@ -22,9 +23,22 @@ const TextBlockEntry: React.FC<Props> = ({ textBlock }) => {
     const divRef = React.useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
 
-    const didMove = React.useRef(false);
+    function onDrag(x: number, y: number) {
+        divRef.current!.style.transform = `translate3d(${x}px,${y}px,0) rotate(-${textBlock.rotation}deg)`;
+    }
+
+    function onDragEnd(x: number, y: number) {
+        dispatch(updateTextBlockPosition(textBlock, x, y));
+    }
+
+    const { didMove, onMouseDown } = useDragBehavior(
+        textBlock.x,
+        textBlock.y,
+        onDrag,
+        onDragEnd
+    );
+
     function onTextClick() {
-        console.log('click');
         if (!didMove.current && !isEditMode) {
             setEditMode(true);
         }
@@ -61,39 +75,6 @@ const TextBlockEntry: React.FC<Props> = ({ textBlock }) => {
         }
     }, [isEditMode]);
 
-    const initPos = React.useRef({ x: 0, y: 0 });
-    function onPointerDown(e: React.PointerEvent) {
-        didMove.current = false;
-        initPos.current.x = e.clientX;
-        initPos.current.y = e.clientY;
-        document.documentElement.addEventListener('mousemove', onPointerMove);
-        document.documentElement.addEventListener('mouseup', onPointerUp);
-    }
-
-    function onPointerMove(e: MouseEvent) {
-        e.preventDefault();
-        const x = e.clientX - initPos.current.x + textBlock.x;
-        const y = e.clientY - initPos.current.y + textBlock.y;
-        divRef.current!.style.transform = `translate3d(${x}px,${y}px,0) rotate(-${textBlock.rotation}deg)`;
-    }
-
-    function onPointerUp(e: MouseEvent) {
-        const deltaX = e.clientX - initPos.current.x;
-        const deltaY = e.clientY - initPos.current.y;
-        if (Math.sqrt(deltaX * deltaX + deltaY * deltaY) > 5) {
-            didMove.current = true;
-            const x = deltaX + textBlock.x;
-            const y = deltaY + textBlock.y;
-            e.preventDefault();
-            dispatch(updateTextBlockPosition(textBlock, x, y));
-        }
-        document.documentElement.removeEventListener(
-            'mousemove',
-            onPointerMove
-        );
-        document.documentElement.removeEventListener('mouseup', onPointerUp);
-    }
-
     return (
         <div
             ref={divRef}
@@ -109,7 +90,7 @@ const TextBlockEntry: React.FC<Props> = ({ textBlock }) => {
             onKeyDown={onKeyDown}
             onClick={onTextClick}
             onBlur={onBlur}
-            onPointerDown={onPointerDown}
+            onMouseDown={onMouseDown}
             contentEditable={isEditMode}
             dangerouslySetInnerHTML={{ __html: textBlock.text }}
         />
