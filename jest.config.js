@@ -5,7 +5,7 @@ module.exports = {
     },
     setupFiles: ['<rootDir>/setupEnzyme.js'],
     moduleDirectories: ['node_modules', 'src'],
-    collectCoverage: false,
+    collectCoverage: true,
     collectCoverageFrom: ['**/*.{ts,tsx}'],
     coverageReporters: ['text', 'text-summary'],
     transform: {
