@@ -10,11 +10,11 @@
         opacity: 0.8;
     }
 
-    &-selected {
+    &--selected {
         border-color: red;
     }
 
-    &-selected:hover {
+    &--selected:hover {
         border-color: red;
         opacity: 1;
     }

@@ -63,10 +63,8 @@ const TextBlockEntry: React.FC<Props> = ({
     function updateBlockContent() {
         const content = divRef.current!.textContent;
         if (content) {
-            console.log('update', textBlock);
             dispatch(updateTextBlockContent(textBlock, content));
         } else {
-            console.log('remove', textBlock);
             dispatch(removeTextBlock(textBlock));
         }
     }
@@ -92,8 +90,6 @@ const TextBlockEntry: React.FC<Props> = ({
             selection.selectAllChildren(divRef.current!);
         }
     }, [isEditMode]);
-
-    console.log('coucvou', textBlock.text);
 
     return (
         <div

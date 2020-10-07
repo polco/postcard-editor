@@ -40,7 +40,7 @@ const PostcardThumb: React.FC<Props> = ({
         <div
             onClick={onSelect}
             className={cn('PostcardThumb', {
-                'PostcardThumb-selected': isSelected
+                'PostcardThumb--selected': isSelected
             })}
             style={{
                 transform: `translate3d(${x}px,-50%,0) scale(${scale}) rotate(${postcard.rotation}rad)`,
