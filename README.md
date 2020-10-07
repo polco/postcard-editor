@@ -38,7 +38,6 @@ All tasks should include some tests. But i may add additional tests at the end (
 - ~~implement undo/redo with redux: 1h~~
 - ~~save current state to local storage to persist accross reloads: 10 min~~
 - ~~allow changing text position: 30 min~~
-- ~~allow changing text dimensions: 30 min~~
 - ~~allow deleting text blocks: 15 min~~ (by erasing the text)
 - ~~allow rotate with the mouse: 2h~~
 
@@ -46,18 +45,17 @@ All tasks should include some tests. But i may add additional tests at the end (
 
 ## Architecture
 ### Main types
- - **TextBlock**: ```{ text: string, x: number, y: number, with: number, lines: number }```
+ - **TextBlock**: ```{ id: string, text: string, x: number, y: number, rotation: number }```
  - **Postcard**: ```{ imageUrl: string, width: number, height: number, rotation: number, textBlocks: TextBlock[] }```
  - **App State**: ```{ postcards: Postcard[], selectedIndex: number, zoom: number }```
 
 ### Main actions
  - `selectPostcard(index: number)`: select a `Postcard`
- - `rotateAndScale(rotation: number, scale: number)`: rotate and scale the current `Postcard`
- - `addTextBlock()`: add a `TextBlock` to the current postcard
- - `updateTextBlockContent(index: number, text: string)`: update a `TextBlock` content
- - `updateTextBlockPosition(index: number, x: number, y: number)`: update a `TextBlock` position
- - `updateTextBlockDimensions(index: number, width: number, lines: number)`: update a `TextBlock` dimensions
- - `deleteTextBlock(index: number)`: delete a `TextBlock` in the current `Postcard`
+ - `rotatePostcard(rotation: number)`: rotate the current `Postcard`
+ - `addTextBlock(x: number, y: number)`: add a `TextBlock` at the specified coordinates to the current postcard
+ - `updateTextBlockContent(textBlock: TextBlock, text: string)`: update a `TextBlock` content
+ - `updateTextBlockPosition(textBlock: TextBlock, x: number, y: number)`: update a `TextBlock` position
+ - `removeTextBlock(textBlock: TextBlock)`: delete a `TextBlock` in the current `Postcard`
  - `undo()`: undo last action
  - `redo()`: redo last action
 
