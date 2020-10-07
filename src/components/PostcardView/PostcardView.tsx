@@ -1,27 +1,26 @@
 import React from 'react';
-
-import TextBlockEntry from 'components/TextBlockEntry';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons/faSync';
 
+import TextBlockEntry from 'components/TextBlockEntry';
+
 import Postcard from 'types/Postcard';
-import { getRotatedBoundingBox } from 'utils/transform';
 import { rotatePostcard } from 'redux/postcardActions';
 import { useDispatch } from 'redux/hooks';
 
-import './PostcardView.scss';
 import useMouseRotation from './useMouseRotation';
+import useDisplayScale from './useDisplayScale';
+
+import './PostcardView.scss';
 
 export interface Props {
     postcard: Postcard;
     zoom: number;
 }
 
-const PADDING = 16 * 2;
-
 const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
     const dispatch = useDispatch();
-    const divRef = React.useRef<HTMLDivElement>(null);
+    const { scale, canvaRef } = useDisplayScale(postcard, zoom);
 
     // no transition when changing the selected postcard
     const lastPostcard = React.useRef(postcard.imageUrl);
@@ -31,44 +30,11 @@ const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
         noTransition = true;
     }
 
-    const [viewDimensions, setViewDimensions] = React.useState({
-        width: 0,
-        height: 0
-    });
-    const centerRef = React.useRef({ x: 0, y: 0 });
-    React.useEffect(() => {
-        const { clientWidth, clientHeight } = divRef.current!;
-        setViewDimensions({
-            width: clientWidth - PADDING,
-            height: clientHeight - PADDING
-        });
-
-        const {
-            left,
-            top,
-            width,
-            height
-        } = divRef.current!.getBoundingClientRect();
-        centerRef.current.x = left + width / 2;
-        centerRef.current.y = top + height / 2;
-    }, []);
-
-    const { minX, maxX, minY, maxY } = getRotatedBoundingBox(
-        postcard.width,
-        postcard.height,
-        postcard.rotation
-    );
-
-    const scale =
-        zoom *
-        (viewDimensions.height > viewDimensions.width
-            ? viewDimensions.width / Math.max(maxX - minX, viewDimensions.width)
-            : viewDimensions.height /
-              Math.max(maxY - minY, viewDimensions.height));
-
     const imageRef = React.useRef<HTMLDivElement>(null);
     function onRotateStart() {
         imageRef.current!.style.transition = 'none';
+        const box = imageRef.current!.getBoundingClientRect();
+        return { x: box.left + box.width / 2, y: box.top + box.height / 2 };
     }
 
     function onRotate(angle: number) {
@@ -80,7 +46,6 @@ const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
         dispatch(rotatePostcard(angle));
     }
     const { onMouseDown } = useMouseRotation(
-        centerRef,
         postcard.rotation,
         onRotateStart,
         onRotate,
@@ -88,7 +53,7 @@ const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
     );
 
     return (
-        <div className="PostcardView" ref={divRef}>
+        <div className="PostcardView" ref={canvaRef}>
             <div
                 className="PostcardView-image"
                 ref={imageRef}
