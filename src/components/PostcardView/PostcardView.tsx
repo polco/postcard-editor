@@ -76,7 +76,7 @@ const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
                     onMouseDown={onMouseDown}
                 />
                 <div className="PostcardView-textBlocks">
-                    {postcard.textBlocks.map((textBlock, i) => (
+                    {postcard.textBlocks.map((textBlock) => (
                         <TextBlockEntry
                             key={textBlock.id}
                             textBlock={textBlock}

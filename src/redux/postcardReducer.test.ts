@@ -13,6 +13,8 @@ import {
 } from './postcardActions';
 import reducer, { initialState, State } from './postcardReducer';
 
+jest.mock('uuid', () => ({ v4: () => 'id' }));
+
 test('reducer: test zooming', () => {
     const state = initialState;
     expect(reducer(state, zoomIn())).toEqual<State>({
@@ -31,7 +33,7 @@ test('reducer: test rotating to 90 degrees increment', () => {
     expect(reducer(state, rotate90Postcard())).toEqual<State>({
         ...state,
         postcards: [
-            { ...state.postcards[0], rotation: 90 },
+            { ...state.postcards[0], rotation: Math.PI / 2 },
             ...state.postcards.slice(1)
         ]
     });
@@ -68,7 +70,7 @@ test('reducer: test adding a text block', () => {
     const state: State = {
         ...initialState,
         postcards: [
-            { ...initialState.postcards[0], rotation: 90 },
+            { ...initialState.postcards[0], rotation: 3 },
             ...initialState.postcards.slice(1)
         ]
     };
@@ -78,7 +80,13 @@ test('reducer: test adding a text block', () => {
             {
                 ...state.postcards[0],
                 textBlocks: [
-                    { text: 'CLICK TO EDIT...', x: 50, y: 10, rotation: 90 }
+                    {
+                        text: 'CLICK TO EDIT...',
+                        x: 50,
+                        y: 10,
+                        rotation: 3,
+                        id: 'id'
+                    }
                 ]
             },
             ...state.postcards.slice(1)
@@ -91,7 +99,7 @@ const stateWithText: State = {
     postcards: [
         {
             ...initialState.postcards[0],
-            textBlocks: [{ text: 't', x: 0, y: 0, rotation: 0 }]
+            textBlocks: [{ text: 't', x: 0, y: 0, rotation: 0, id: 'id' }]
         },
         ...initialState.postcards.slice(1)
     ]
