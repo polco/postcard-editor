@@ -79,8 +79,21 @@ const reducer: Reducer<Readonly<State>, Action> = (
             };
         }
         case 'rotatePostcard': {
+            const postcard: Postcard = {
+                ...state.postcards[state.selectedIndex],
+                rotation: action.rotation
+            };
+            const postcards = [...state.postcards];
+            postcards[state.selectedIndex] = postcard;
+
+            return {
+                ...state,
+                postcards
+            };
+        }
+        case 'rotate90Postcard': {
             const postcard = { ...state.postcards[state.selectedIndex] };
-            postcard.rotation = postcard.rotation + 90;
+            postcard.rotation = Math.floor(postcard.rotation / 90) * 90 + 90;
             const postcards = [...state.postcards];
             postcards[state.selectedIndex] = postcard;
 

@@ -10,6 +10,9 @@ function useDragBehavior(
     const didMove = React.useRef(false);
 
     function onMouseDown(e: React.MouseEvent) {
+        if (e.button === 2) {
+            return;
+        }
         didMove.current = false;
         initPos.current.x = e.clientX;
         initPos.current.y = e.clientY;

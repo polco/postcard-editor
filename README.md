@@ -39,8 +39,8 @@ All tasks should include some tests. But i may add additional tests at the end (
 - ~~save current state to local storage to persist accross reloads: 10 min~~
 - ~~allow changing text position: 30 min~~
 - ~~allow changing text dimensions: 30 min~~
-- allow deleting text blocks: 15 min
-- allow rotate/zooming with the mouse: 2h
+- ~~allow deleting text blocks: 15 min~~ (by erasing the text)
+- ~~allow rotate with the mouse: 2h~~
 
 
 

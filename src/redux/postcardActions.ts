@@ -8,6 +8,11 @@ interface SelectPostcardAction {
 
 interface RotatePostcardAction {
     type: 'rotatePostcard';
+    rotation: number;
+}
+
+interface Rotate90PostcardAction {
+    type: 'rotate90Postcard';
 }
 
 interface ZoomInAction {
@@ -54,6 +59,7 @@ interface RemovePostcardAction {
 type Action =
     | SelectPostcardAction
     | RotatePostcardAction
+    | Rotate90PostcardAction
     | ZoomInAction
     | ZoomOutAction
     | AddTextBlockAction
@@ -72,9 +78,16 @@ export function selectPostcard(postcard: Postcard): SelectPostcardAction {
     };
 }
 
-export function rotatePostcard(): RotatePostcardAction {
+export function rotatePostcard(rotation: number): RotatePostcardAction {
     return {
-        type: 'rotatePostcard'
+        type: 'rotatePostcard',
+        rotation
+    };
+}
+
+export function rotate90Postcard(): Rotate90PostcardAction {
+    return {
+        type: 'rotate90Postcard'
     };
 }
 

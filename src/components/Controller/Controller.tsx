@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch } from 'redux/hooks';
 import {
     addNewTextBlock,
-    rotatePostcard,
+    rotate90Postcard,
     zoomIn,
     zoomOut
 } from 'redux/postcardActions';
@@ -22,7 +22,7 @@ const Controller: React.FC<Props> = ({ postcard }) => {
     const dispatch = useDispatch();
 
     function onRotate() {
-        dispatch(rotatePostcard());
+        dispatch(rotate90Postcard());
     }
 
     function onZoomIn() {

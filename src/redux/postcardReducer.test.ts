@@ -3,6 +3,7 @@ import {
     addPostcard,
     removePostcard,
     removeTextBlock,
+    rotate90Postcard,
     rotatePostcard,
     selectPostcard,
     updateTextBlockContent,
@@ -25,12 +26,23 @@ test('reducer: test zooming', () => {
     });
 });
 
-test('reducer: test rotating', () => {
+test('reducer: test rotating to 90 degrees increment', () => {
     const state = initialState;
-    expect(reducer(state, rotatePostcard())).toEqual<State>({
+    expect(reducer(state, rotate90Postcard())).toEqual<State>({
         ...state,
         postcards: [
             { ...state.postcards[0], rotation: 90 },
+            ...state.postcards.slice(1)
+        ]
+    });
+});
+
+test('reducer: test rotating', () => {
+    const state = initialState;
+    expect(reducer(state, rotatePostcard(13))).toEqual<State>({
+        ...state,
+        postcards: [
+            { ...state.postcards[0], rotation: 13 },
             ...state.postcards.slice(1)
         ]
     });
