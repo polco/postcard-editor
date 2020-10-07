@@ -1,6 +1,11 @@
 import React from 'react';
+import { getRotatedCoords } from 'utils/transform';
 
 function useDragBehavior(
+    centerX: number,
+    centerY: number,
+    imageRotation: number,
+    imageScale: number,
     initX: number,
     initY: number,
     onDrag: (x: number, y: number) => void,
@@ -14,25 +19,46 @@ function useDragBehavior(
             return;
         }
         didMove.current = false;
-        initPos.current.x = e.clientX;
-        initPos.current.y = e.clientY;
+        const coords = getRotatedCoords(
+            centerX,
+            centerY,
+            e.clientX,
+            e.clientY,
+            imageRotation
+        );
+        initPos.current.x = coords.x;
+        initPos.current.y = coords.y;
         document.documentElement.addEventListener('mousemove', onMouseMove);
         document.documentElement.addEventListener('mouseup', onMouseUp);
     }
 
     function onMouseMove(e: MouseEvent) {
-        const x = e.clientX - initPos.current.x + initX;
-        const y = e.clientY - initPos.current.y + initY;
+        const coords = getRotatedCoords(
+            centerX,
+            centerY,
+            e.clientX,
+            e.clientY,
+            imageRotation
+        );
+        const x = (coords.x - initPos.current.x) / imageScale + initX;
+        const y = (coords.y - initPos.current.y) / imageScale + initY;
         onDrag(x, y);
     }
 
     function onMouseUp(e: MouseEvent) {
-        const deltaX = e.clientX - initPos.current.x;
-        const deltaY = e.clientY - initPos.current.y;
+        const coords = getRotatedCoords(
+            centerX,
+            centerY,
+            e.clientX,
+            e.clientY,
+            imageRotation
+        );
+        const deltaX = coords.x - initPos.current.x;
+        const deltaY = coords.y - initPos.current.y;
         if (Math.sqrt(deltaX * deltaX + deltaY * deltaY) > 5) {
             didMove.current = true;
-            const x = deltaX + initX;
-            const y = deltaY + initY;
+            const x = deltaX / imageScale + initX;
+            const y = deltaY / imageScale + initY;
             onDragEnd(x, y);
         }
         document.documentElement.removeEventListener('mousemove', onMouseMove);

@@ -9,22 +9,33 @@ import {
     updateTextBlockPosition
 } from 'redux/postcardActions';
 
-import './TextBlockEntry.scss';
 import useDragBehavior from './useDragBehavior';
+
+import './TextBlockEntry.scss';
 
 export interface Props {
     textBlock: TextBlock;
+    centerX: number;
+    centerY: number;
+    imageRotation: number;
+    imageScale: number;
 }
 
 export const TEXT_LINE_HEIGHT = 20;
 
-const TextBlockEntry: React.FC<Props> = ({ textBlock }) => {
+const TextBlockEntry: React.FC<Props> = ({
+    textBlock,
+    centerX,
+    centerY,
+    imageRotation,
+    imageScale
+}) => {
     const [isEditMode, setEditMode] = React.useState(false);
     const divRef = React.useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
 
     function onDrag(x: number, y: number) {
-        divRef.current!.style.transform = `translate3d(${x}px,${y}px,0) rotate(-${textBlock.rotation}deg)`;
+        divRef.current!.style.transform = `translate3d(${x}px,${y}px,0) rotate(${-textBlock.rotation}rad)`;
     }
 
     function onDragEnd(x: number, y: number) {
@@ -32,13 +43,18 @@ const TextBlockEntry: React.FC<Props> = ({ textBlock }) => {
     }
 
     const { didMove, onMouseDown } = useDragBehavior(
+        centerX,
+        centerY,
+        imageRotation,
+        imageScale,
         textBlock.x,
         textBlock.y,
         onDrag,
         onDragEnd
     );
 
-    function onTextClick() {
+    function onTextClick(e: React.MouseEvent) {
+        e.stopPropagation();
         if (!didMove.current && !isEditMode) {
             setEditMode(true);
         }
@@ -47,8 +63,10 @@ const TextBlockEntry: React.FC<Props> = ({ textBlock }) => {
     function updateBlockContent() {
         const content = divRef.current!.textContent;
         if (content) {
+            console.log('update', textBlock);
             dispatch(updateTextBlockContent(textBlock, content));
         } else {
+            console.log('remove', textBlock);
             dispatch(removeTextBlock(textBlock));
         }
     }
@@ -75,6 +93,8 @@ const TextBlockEntry: React.FC<Props> = ({ textBlock }) => {
         }
     }, [isEditMode]);
 
+    console.log('coucvou', textBlock.text);
+
     return (
         <div
             ref={divRef}
@@ -82,7 +102,11 @@ const TextBlockEntry: React.FC<Props> = ({ textBlock }) => {
                 'TextBlockEntry--edit': isEditMode
             })}
             style={{
-                transform: `translate3d(${textBlock.x}px,${textBlock.y}px,0) rotate(-${textBlock.rotation}deg)`,
+                transform: `translate3d(${Math.floor(
+                    textBlock.x
+                )}px,${Math.floor(
+                    textBlock.y
+                )}px,0) rotate(${-textBlock.rotation}rad)`,
                 height: `${TEXT_LINE_HEIGHT + (isEditMode ? 10 : 0)}px`,
                 lineHeight: `${TEXT_LINE_HEIGHT}px`,
                 fontSize: `${TEXT_LINE_HEIGHT}px`

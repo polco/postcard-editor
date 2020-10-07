@@ -43,7 +43,7 @@ const PostcardThumb: React.FC<Props> = ({
                 'PostcardThumb-selected': isSelected
             })}
             style={{
-                transform: `translate3d(${x}px,-50%,0) scale(${scale}) rotate(${postcard.rotation}deg)`,
+                transform: `translate3d(${x}px,-50%,0) scale(${scale}) rotate(${postcard.rotation}rad)`,
                 height: `${postcard.height}px`,
                 width: `${postcard.width}px`,
                 backgroundImage: `url(${postcard.imageUrl})`

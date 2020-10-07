@@ -19,11 +19,10 @@ export function getRotatedCoords(
 export function getRotatedBoundingBox(
     width: number,
     height: number,
-    rotation: number,
+    angle: number,
     centerX = width / 2,
     centerY = height / 2
 ) {
-    const angle = (rotation * Math.PI) / 180;
     const coord1 = getRotatedCoords(centerX, centerY, 0, 0, angle);
     const coord2 = getRotatedCoords(centerX, centerY, width, 0, angle);
     const coord3 = getRotatedCoords(centerX, centerY, width, height, angle);

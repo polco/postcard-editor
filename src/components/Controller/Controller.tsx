@@ -8,17 +8,16 @@ import {
     zoomOut
 } from 'redux/postcardActions';
 import { undo, redo } from 'redux/undoable';
-import Postcard from 'types/Postcard';
 
 import { TEXT_LINE_HEIGHT } from 'components/TextBlockEntry/TextBlockEntry';
 
 import './Controller.scss';
 
 export interface Props {
-    postcard: Postcard;
+    getCenterCoordsInWorkspace: () => { x: number; y: number };
 }
 
-const Controller: React.FC<Props> = ({ postcard }) => {
+const Controller: React.FC<Props> = ({ getCenterCoordsInWorkspace }) => {
     const dispatch = useDispatch();
 
     function onRotate() {
@@ -34,8 +33,9 @@ const Controller: React.FC<Props> = ({ postcard }) => {
     }
 
     function onNewText() {
-        const x = (postcard.width - 200) / 2;
-        const y = (postcard.height - TEXT_LINE_HEIGHT) / 2;
+        const center = getCenterCoordsInWorkspace();
+        const x = center.x - 100;
+        const y = center.y - TEXT_LINE_HEIGHT / 2;
         dispatch(addNewTextBlock(x, y));
     }
 

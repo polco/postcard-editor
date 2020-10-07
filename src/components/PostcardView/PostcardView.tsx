@@ -38,7 +38,7 @@ const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
     }
 
     function onRotate(angle: number) {
-        imageRef.current!.style.transform = `translate3d(-50%, -50%, 0) scale(${scale}) rotate(${angle}deg)`;
+        imageRef.current!.style.transform = `translate3d(-50%, -50%, 0) scale(${scale}) rotate(${angle}rad)`;
     }
 
     function onRotateEnd(angle: number) {
@@ -52,6 +52,9 @@ const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
         onRotateEnd
     );
 
+    const imageCenterX = postcard.width / 2;
+    const imageCenterY = postcard.height / 2;
+
     return (
         <div className="PostcardView" ref={canvaRef}>
             <div
@@ -62,23 +65,28 @@ const PostcardView: React.FC<Props> = ({ postcard, zoom }) => {
                     width: `${postcard.width}px`,
                     height: `${postcard.height}px`,
                     transition: noTransition ? 'none' : '',
-                    transform: `translate3d(-50%, -50%, 0) scale(${scale}) rotate(${postcard.rotation}deg)`
+                    transform: `translate3d(-50%, -50%, 0) scale(${scale}) rotate(${postcard.rotation}rad)`
                 }}
-                onMouseDown={onMouseDown}
             >
                 <FontAwesomeIcon
                     size="3x"
                     icon={faSync}
                     className="PostcardView-rotateHook"
-                    style={{
-                        transform: `scale(${1 / scale})`
-                    }}
+                    style={{ transform: `scale(${1 / scale})` }}
+                    onMouseDown={onMouseDown}
                 />
-            </div>
-            <div className="PostcardView-textBlocks">
-                {postcard.textBlocks.map((textBlock, i) => (
-                    <TextBlockEntry key={i} textBlock={textBlock} />
-                ))}
+                <div className="PostcardView-textBlocks">
+                    {postcard.textBlocks.map((textBlock, i) => (
+                        <TextBlockEntry
+                            key={textBlock.id}
+                            textBlock={textBlock}
+                            centerX={imageCenterX}
+                            centerY={imageCenterY}
+                            imageRotation={postcard.rotation}
+                            imageScale={scale}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );

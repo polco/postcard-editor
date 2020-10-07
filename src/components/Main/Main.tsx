@@ -17,9 +17,19 @@ const Main: React.FC = () => {
     const { postcards, selectedIndex, zoom } = useSelector(selectState);
     const selectedPostcard = postcards[selectedIndex];
 
+    const divRef = React.useRef<HTMLDivElement>(null);
+    function getCenterCoordsInWorkspace() {
+        const box = divRef.current!.getBoundingClientRect();
+        return { x: box.left + box.width / 2, y: box.top + box.height / 2 };
+    }
+    const getCenterCoordsInWorkspaceCb = React.useCallback(
+        getCenterCoordsInWorkspace,
+        []
+    );
+
     return (
         <div className="Main">
-            <div className="Main-workspace">
+            <div className="Main-workspace" ref={divRef}>
                 {selectedPostcard ? (
                     <PostcardView postcard={selectedPostcard} zoom={zoom} />
                 ) : (
@@ -30,7 +40,9 @@ const Main: React.FC = () => {
                     selectedIndex={selectedIndex}
                 />
             </div>
-            <Controller postcard={selectedPostcard} />
+            <Controller
+                getCenterCoordsInWorkspace={getCenterCoordsInWorkspaceCb}
+            />
         </div>
     );
 };

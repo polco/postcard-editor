@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+import { v4 } from 'uuid';
 
 import Action from './actions';
 import Postcard from 'types/Postcard';
@@ -8,6 +9,8 @@ export interface State {
     selectedIndex: number;
     zoom: number;
 }
+
+const NIGHTY_DEG = Math.PI / 2;
 
 export const initialState: State = {
     postcards: [
@@ -92,8 +95,12 @@ const reducer: Reducer<Readonly<State>, Action> = (
             };
         }
         case 'rotate90Postcard': {
-            const postcard = { ...state.postcards[state.selectedIndex] };
-            postcard.rotation = Math.floor(postcard.rotation / 90) * 90 + 90;
+            const postcard: Postcard = {
+                ...state.postcards[state.selectedIndex]
+            };
+            postcard.rotation =
+                Math.floor(postcard.rotation / NIGHTY_DEG) * NIGHTY_DEG +
+                NIGHTY_DEG;
             const postcards = [...state.postcards];
             postcards[state.selectedIndex] = postcard;
 
@@ -113,14 +120,17 @@ const reducer: Reducer<Readonly<State>, Action> = (
                 zoom: state.zoom - 0.1
             };
         case 'addTextBlock': {
-            const postcard = { ...state.postcards[state.selectedIndex] };
+            const postcard: Postcard = {
+                ...state.postcards[state.selectedIndex]
+            };
             postcard.textBlocks = [
                 ...postcard.textBlocks,
                 {
                     text: 'CLICK TO EDIT...',
                     x: action.x,
                     y: action.y,
-                    rotation: postcard.rotation % 360
+                    id: v4(),
+                    rotation: postcard.rotation
                 }
             ];
             const postcards = [...state.postcards];
@@ -132,7 +142,9 @@ const reducer: Reducer<Readonly<State>, Action> = (
             };
         }
         case 'updateTextBlockContent': {
-            const postcard = { ...state.postcards[state.selectedIndex] };
+            const postcard: Postcard = {
+                ...state.postcards[state.selectedIndex]
+            };
 
             const textBlockIndex = postcard.textBlocks.indexOf(
                 action.textBlock
@@ -152,7 +164,9 @@ const reducer: Reducer<Readonly<State>, Action> = (
             };
         }
         case 'updateTextBlockPosition': {
-            const postcard = { ...state.postcards[state.selectedIndex] };
+            const postcard: Postcard = {
+                ...state.postcards[state.selectedIndex]
+            };
 
             const textBlockIndex = postcard.textBlocks.indexOf(
                 action.textBlock
@@ -173,7 +187,9 @@ const reducer: Reducer<Readonly<State>, Action> = (
             };
         }
         case 'removeTextBlock': {
-            const postcard = { ...state.postcards[state.selectedIndex] };
+            const postcard: Postcard = {
+                ...state.postcards[state.selectedIndex]
+            };
             postcard.textBlocks = postcard.textBlocks.filter(
                 (t) => t !== action.textBlock
             );
