@@ -9,7 +9,7 @@ function useMouseRotation(
     onRotateStart: () => { x: number; y: number },
     onRotate: (angle: number) => void,
     onRotateEnd: (angle: number) => void
-) {
+): { onMouseDown: (e: React.MouseEvent) => void } {
     let initAngle = 0;
     let centerX = 0;
     let centerY = 0;

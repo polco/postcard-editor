@@ -25,7 +25,7 @@ const reducer: Reducer<Readonly<State>, Action> = (
     }
 };
 const undoableReducer = undoable(reducer);
-const undoState = undoableReducer(undefined, {} as any);
+const undoState = undoableReducer(undefined, ({} as unknown) as Action);
 
 test('undoable works as expected', () => {
     let state = undoState;

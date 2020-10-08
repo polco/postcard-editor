@@ -22,7 +22,7 @@ export function getRotatedBoundingBox(
     angle: number,
     centerX = width / 2,
     centerY = height / 2
-) {
+): { minX: number; maxX: number; minY: number; maxY: number } {
     const coord1 = getRotatedCoords(centerX, centerY, 0, 0, angle);
     const coord2 = getRotatedCoords(centerX, centerY, width, 0, angle);
     const coord3 = getRotatedCoords(centerX, centerY, width, height, angle);

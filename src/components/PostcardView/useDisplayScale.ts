@@ -4,7 +4,10 @@ import { getRotatedBoundingBox } from 'utils/transform';
 
 const PADDING = 16 * 2;
 
-function useDisplayScale(postcard: Postcard, zoom: number) {
+function useDisplayScale(
+    postcard: Postcard,
+    zoom: number
+): { scale: number; canvaRef: React.RefObject<HTMLDivElement> } {
     const canvaRef = React.useRef<HTMLDivElement>(null);
     const [viewDimensions, setViewDimensions] = React.useState({
         width: 0,

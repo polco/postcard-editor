@@ -12,6 +12,8 @@ import {
     zoomOut
 } from './postcardActions';
 import reducer, { initialState, State } from './postcardReducer';
+import Actions from './postcardActions';
+import { UndoableAction } from './undoable';
 
 jest.mock('uuid', () => ({ v4: () => 'id' }));
 
@@ -59,11 +61,17 @@ test('reducer: test selecting a postcard', () => {
 });
 
 test('reducer: any undefined action returns the state', () => {
-    expect(reducer(initialState, { type: 'hehe' } as any)).toBe(initialState);
+    expect(
+        reducer(initialState, ({ type: 'hehe' } as unknown) as UndoableAction<
+            Actions
+        >)
+    ).toBe(initialState);
 });
 
 test('reducer: default state is correct', () => {
-    expect(reducer(undefined, {} as any)).toBe(initialState);
+    expect(reducer(undefined, ({} as unknown) as UndoableAction<Actions>)).toBe(
+        initialState
+    );
 });
 
 test('reducer: test adding a text block', () => {

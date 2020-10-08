@@ -3,7 +3,7 @@ module.exports = {
     moduleNameMapper: {
         '\\.scss$': 'identity-obj-proxy'
     },
-    setupFiles: ['<rootDir>/setupEnzyme.js'],
+    setupFiles: ['<rootDir>/setupEnzyme.ts'],
     moduleDirectories: ['node_modules', 'src'],
     collectCoverage: true,
     collectCoverageFrom: ['**/*.{ts,tsx}'],

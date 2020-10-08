@@ -28,7 +28,7 @@ export interface UndoableState<S> {
 
 export type UndoableAction<A extends Action> = A | UndoAction | RedoAction;
 
-function undoable<S, A extends Action<String>>(
+function undoable<S, A extends Action<string>>(
     reducer: Reducer<S, A>
 ): Reducer<UndoableState<S>, UndoableAction<A>> {
     const initialState: UndoableState<S> = {

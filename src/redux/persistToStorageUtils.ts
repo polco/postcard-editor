@@ -4,7 +4,7 @@ import { State } from './reducer';
 
 export const STORAGE_KEY = 'postcard-editor';
 
-export function* persistToStorageSaga() {
+export function* persistToStorageSaga(): Generator {
     yield takeEvery('*', function* () {
         const state: State = yield select();
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.present));

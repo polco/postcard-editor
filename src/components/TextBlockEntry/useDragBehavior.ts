@@ -10,7 +10,10 @@ function useDragBehavior(
     initY: number,
     onDrag: (x: number, y: number) => void,
     onDragEnd: (x: number, y: number) => void
-) {
+): {
+    didMove: React.RefObject<boolean>;
+    onMouseDown: (e: React.MouseEvent) => void;
+} {
     const initPos = React.useRef({ x: 0, y: 0 });
     const didMove = React.useRef(false);
 
