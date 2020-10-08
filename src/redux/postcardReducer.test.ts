@@ -11,8 +11,8 @@ import {
     zoomIn,
     zoomOut
 } from './postcardActions';
-import reducer, { initialState, State } from './postcardReducer';
 import Actions from './postcardActions';
+import reducer, { initialState, State } from './postcardReducer';
 import { UndoableAction } from './undoable';
 
 jest.mock('uuid', () => ({ v4: () => 'id' }));

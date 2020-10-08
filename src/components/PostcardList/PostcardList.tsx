@@ -1,16 +1,18 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons/faPlusCircle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
 import Postcard from 'types/Postcard';
+import { getRotatedBoundingBox } from 'utils/transform';
+
 import PostcardThumb, { HEIGHT } from 'components/PostcardThumb';
+
 import { useDispatch } from 'redux/hooks';
 import {
     addPostcard,
     selectPostcard as selectPostcardAction,
     removePostcard as removePostcardAction
 } from 'redux/postcardActions';
-import { getRotatedBoundingBox } from 'utils/transform';
 
 import './PostcardList.scss';
 

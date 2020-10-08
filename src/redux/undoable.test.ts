@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+
 import undoable, { redo, undo } from './undoable';
 
 type State = { counter: number };

@@ -1,15 +1,16 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons/faSync';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+
+import Postcard from 'types/Postcard';
 
 import TextBlockEntry from 'components/TextBlockEntry';
 
-import Postcard from 'types/Postcard';
-import { rotatePostcard } from 'redux/postcardActions';
 import { useDispatch } from 'redux/hooks';
+import { rotatePostcard } from 'redux/postcardActions';
 
-import useMouseRotation from './useMouseRotation';
 import useDisplayScale from './useDisplayScale';
+import useMouseRotation from './useMouseRotation';
 
 import './PostcardView.scss';
 

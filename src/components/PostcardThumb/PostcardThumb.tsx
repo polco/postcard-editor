@@ -1,7 +1,7 @@
-import React from 'react';
-import cn from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import cn from 'classnames';
+import React from 'react';
 
 import Postcard from 'types/Postcard';
 

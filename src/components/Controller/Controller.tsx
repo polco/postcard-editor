@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { TEXT_LINE_HEIGHT } from 'components/TextBlockEntry/TextBlockEntry';
+
 import { useDispatch } from 'redux/hooks';
 import {
     addNewTextBlock,
@@ -8,8 +10,6 @@ import {
     zoomOut
 } from 'redux/postcardActions';
 import { undo, redo } from 'redux/undoable';
-
-import { TEXT_LINE_HEIGHT } from 'components/TextBlockEntry/TextBlockEntry';
 
 import './Controller.scss';
 

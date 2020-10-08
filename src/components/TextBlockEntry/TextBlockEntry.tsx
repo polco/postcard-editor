@@ -1,7 +1,8 @@
-import React from 'react';
 import cn from 'classnames';
+import React from 'react';
 
 import TextBlock from 'types/TextBlock';
+
 import { useDispatch } from 'redux/hooks';
 import {
     removeTextBlock,
